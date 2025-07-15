@@ -18,7 +18,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 md:pt-0">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-hero">
         {[...Array(6)].map((_, i) => (
@@ -61,7 +61,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight"
             >
               <span className="block">Hello, I'm</span>
               <span className="animate-text">Rishik Reddy Cheruku</span>
@@ -71,7 +71,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-xl lg:text-2xl text-muted-foreground mb-8 leading-relaxed"
+              className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 leading-relaxed"
             >
               Software Engineer
               <br />
@@ -164,7 +164,7 @@ const HeroSection = () => {
               <motion.img
                 src={profileImage}
                 alt="Rishik Reddy Cheruku"
-                className="relative w-80 h-80 rounded-full object-cover z-10"
+                className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover z-10"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               />
