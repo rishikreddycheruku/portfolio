@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Download, Github, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import profileImage from '@/assets/profile-image.jpg';
+import resume from '@/assets/resume.pdf'
 
 const HeroSection = () => {
   const scrollToNext = () => {
@@ -103,10 +104,10 @@ const HeroSection = () => {
                 size="lg"
                 variant="outline"
                 className="hover-glow group"
-                onClick={() => window.open('/resume.pdf', '_blank')}
+                onClick={() => window.open(resume, '_blank')}
               >
                 <Download size={20} className="mr-2" />
-                Download Resume
+                View Resume
               </Button>
             </motion.div>
 
