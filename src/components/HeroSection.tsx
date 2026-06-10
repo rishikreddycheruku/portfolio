@@ -103,7 +103,7 @@ const HeroSection = () => {
                 size="lg"
                 variant="outline"
                 className="hover-glow group"
-                onClick={() => window.open('/RishikReddyCheruku_Resume.pdf', '_blank')}
+                onClick={() => window.open('/resume.pdf', '_blank')}
               >
                 <Download size={20} className="mr-2" />
                 Download Resume
