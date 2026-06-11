@@ -4,21 +4,21 @@ import AnimatedSection from './AnimatedSection';
 
 const ExperienceSection = () => {
   const experiences = [
-    // {
-    //   id: 1,
-    //   title: 'Senior Full-Stack Developer',
-    //   company: 'TechCorp Solutions',
-    //   period: '2022 - Present',
-    //   location: 'San Francisco, CA',
-    //   type: 'Full-time',
-    //   description: 'Led a team of 5 developers in building scalable web applications using React, Node.js, and AWS. Improved application performance by 40% and implemented CI/CD pipelines.',
-    //   achievements: [
-    //     'Architected microservices handling 1M+ daily requests',
-    //     'Mentored 3 junior developers and conducted code reviews',
-    //     'Reduced deployment time by 60% with automated workflows',
-    //   ],
-    //   color: 'var(--gradient-primary)',
-    // },
+    {
+      id: 1,
+      title: 'Business Intelligence Intern',
+      company: 'Goldman Sachs',
+      period: 'Jan - Jun 2022',
+      location: 'Bangalore, Karnataka',
+      type: 'Internship',
+      description: 'Engineered production-grade automation frameworks, data pipelines, and AI-driven applications using Python, SQL, Alteryx, and LLM technologies to streamline workflows, improve data quality, enhance system scalability, and eliminate manual processes through intelligent automation.',
+      achievements: [
+        'Built reconciliation platform preventing downstream errors through 150+ validations',
+        'Automated reporting pipelines and SLA monitoring for 25+ stakeholders',
+        'Implemented LLM-powered legal document extraction achieving 85%+ production accuracy.',
+      ],
+      color: 'var(--gradient-primary)',
+    },
     // {
     //   id: 2,
     //   title: 'Frontend Developer',
@@ -135,13 +135,15 @@ const ExperienceSection = () => {
                   viewport={{ once: true }}
                 >
                   {/* Timeline Node */}
-                  <motion.div
-                    className="absolute left-0 lg:left-1/2 w-8 h-8 rounded-full border-4 border-background transform lg:-translate-x-1/2 z-10"
-                    style={{ background: exp.color }}
-                    whileInView={{ scale: [0, 1.2, 1] }}
-                    transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
-                    viewport={{ once: true }}
-                  />
+                  <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 z-10">
+                    <motion.div
+                      className="w-8 h-8 rounded-full border-4 border-background"
+                      style={{ background: exp.color }}
+                      whileInView={{ scale: [0, 1.2, 1] }}
+                      transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
 
                   {/* Content */}
                   <motion.div
