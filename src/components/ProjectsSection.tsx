@@ -1,12 +1,44 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Play } from 'lucide-react';
+import { ExternalLink, Github, Play, Lock} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 import project1 from '@/assets/project-1.jpg';
 import project2 from '@/assets/project-2.jpg';
 import project3 from '@/assets/project-3.jpg';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+
+
 const ProjectsSection = () => {
+
+  const [privateModal, setPrivateModal] = useState(false);
+
+  const [modalType, setModalType] = useState<'code' | 'demo'>('code');
+
+  const handlePrivateAccess = (type: 'code' | 'demo') => {
+    setModalType(type);
+    setPrivateModal(true);
+  };
+
+  const openProjectLink = (
+    url: string,
+    type: 'code' | 'demo'
+  ) => {
+    if (url === '#') {
+      handlePrivateAccess(type);
+      return;
+    }
+
+    window.open(url, '_blank');
+  };
+
   const projects = [
     {
       id: 1,
@@ -124,11 +156,24 @@ const ProjectsSection = () => {
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                       >
-                        <Button size="sm" className="btn-gradient">
+                        <Button
+                          size="sm"
+                          className="btn-gradient"
+                          onClick={() =>
+                            openProjectLink(project.liveUrl, 'demo')
+                          }
+                        >
                           <Play size={16} className="mr-2" />
                           Live Demo
                         </Button>
-                        <Button size="sm" variant="outline" className="text-white border-white hover:bg-white hover:text-black">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="text-white border-white hover:bg-white hover:text-black"
+                          onClick={() =>
+                            openProjectLink(project.githubUrl, 'code')
+                          }
+                        >
                           <Github size={16} className="mr-2" />
                           Code
                         </Button>
@@ -193,11 +238,22 @@ const ProjectsSection = () => {
                       transition={{ duration: 0.6, delay: 0.7 }}
                       viewport={{ once: true }}
                     >
-                      <Button className="btn-gradient hover-lift">
+                      <Button
+                        className="btn-gradient hover-lift"
+                        onClick={() =>
+                          openProjectLink(project.liveUrl, 'demo')
+                        }
+                      >
                         <ExternalLink size={18} className="mr-2" />
                         Live Project
                       </Button>
-                      <Button variant="outline" className="hover-glow">
+                      <Button
+                        variant="outline"
+                        className="hover-glow"
+                        onClick={() =>
+                          openProjectLink(project.githubUrl, 'code')
+                        }
+                      >
                         <Github size={18} className="mr-2" />
                         View Code
                       </Button>
@@ -274,6 +330,149 @@ const ProjectsSection = () => {
           </div>
         </div>
       </section>
+      <Dialog
+        open={privateModal}
+        onOpenChange={setPrivateModal}
+      >
+        <DialogContent
+          className="
+            glass
+            backdrop-blur-2xl
+            border-primary/20
+            max-w-lg
+            px-10
+            py-8
+            bg-background/95
+            shadow-[0_0_60px_hsl(var(--primary)/0.15)]
+            [&>button]:hidden
+          "
+        >
+          <div
+            className="
+              h-1
+              w-full
+              bg-gradient-primary
+              rounded-full
+              mb-4
+            "
+          />
+
+          <motion.div
+            className="flex justify-center mb-8"
+            initial={{
+              opacity: 0,
+              scale: 0.8,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.4,
+            }}
+          >
+            <div
+              className="
+                relative
+                h-24
+                w-24
+                rounded-full
+                flex
+                items-center
+                justify-center
+                border
+                border-primary/20
+                bg-primary/5
+              "
+            >
+              <div
+                className="
+                  absolute
+                  inset-0
+                  rounded-full
+                  bg-primary/10
+                  blur-xl
+                "
+              />
+
+              <Lock
+                className="
+                  relative
+                  h-10
+                  w-10
+                  text-primary
+                "
+              />
+            </div>
+          </motion.div>
+
+          <DialogHeader>
+
+            <DialogTitle
+              className="
+                text-center
+                text-4xl
+                font-bold
+                tracking-tight
+              "
+            >
+              {modalType === 'code'
+                ? 'Access Restricted'
+                : 'Private Access Only'}
+            </DialogTitle>
+
+            <DialogDescription asChild>
+              <div className="space-y-5 text-center">
+
+                {modalType === 'code' ? (
+                  <>
+                    <p>
+                      This project includes proprietary research and implementation work
+                      that isn't publicly available.
+                    </p>
+
+                    <p className="font-medium text-primary">
+                      The repository is currently private.
+                    </p>
+
+                    <p>
+                      Access is intentionally restricted while the project remains under
+                      controlled distribution.
+                    </p>
+
+                    <p className="italic text-muted-foreground">
+                      Rest assured — the project exists, the deadlines were survived,
+                      and the bugs were persuaded to sign a peace treaty.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      This project was developed for research, evaluation, and controlled testing.
+                    </p>
+
+                    <p className="font-medium text-primary">
+                      This project isn't currently available through a public deployment.
+                    </p>
+
+                    <p>
+                      I'm happy to discuss the architecture, implementation details,
+                      and outcomes if you're interested.
+                    </p>
+
+                    <p className="italic text-muted-foreground">
+                      The infrastructure is currently off duty and enjoying a
+                      surprisingly stress-free existence.
+                    </p>
+                  </>
+                )}
+
+              </div>
+            </DialogDescription>
+
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </AnimatedSection>
   );
 };
